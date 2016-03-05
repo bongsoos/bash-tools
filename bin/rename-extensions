@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# script to convert the extension of all the files in the directory with extensions <ext1> to extension <ext2>
+
+if [ $# -lt 2 ]; then
+	    echo "Usage: ./rename-extensions <ext1> <ext2>"
+	exit 1
+fi
+
+for file in *.$1; do
+    mv "$file" "${file%.$1}.$2"
+done
