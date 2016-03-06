@@ -1,0 +1,36 @@
+#!/bin/bash
+# run matlab 
+
+case $HOSTNAME in
+    corn*.stanford.edu)
+        . /etc/profile.d/modules.sh
+        export HOME=/farmshare/user_data/bssuh
+        module load matlab
+        if [ $1 = no ] ; then
+            if [ -z "$2" ]
+            then
+                echo "Run matlab -nodisplay -nodesktop -nosplash"
+                matlab -nodisplay -nodesktop -nosplash
+            else
+                matlab -nodisplay -nodesktop -nosplash -r $2
+            fi
+        else
+            echo "Run matlab display"
+            matlab
+        fi
+        ;;
+    *)
+        if [ -z "$1" ] ; then
+            echo "Run matlab display"
+            /Applications/MATLAB_R2014a.app/bin/matlab
+        else
+            if [ -z "$2" ]
+            then
+                echo "Run matlab -nodisplay -nodesktop -nosplash"
+                /Applications/MATLAB_R2014a.app/bin/matlab -nodisplay -nodesktop -nosplash
+            else
+                /Applications/MATLAB_R2014a.app/bin/matlab -nodisplay -nodesktop -nosplash -r $2
+            fi
+        fi
+        ;;
+esac
